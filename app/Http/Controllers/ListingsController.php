@@ -92,7 +92,8 @@ class ListingsController extends Controller
             'email' => 'email'
         ]);
 
-        //Create listing
+        // Update listing
+        $listing = Listing::find($id);
         $listing->name = $request->input('name');
         $listing->website = $request->input('website');
         $listing->email = $request->input('email');
@@ -114,6 +115,10 @@ class ListingsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $listing = Listing::find($id);
+        $listing->delete();
+
+        return redirect('/dashboard')->with('success','Listing Removed');
+
     }
 }
